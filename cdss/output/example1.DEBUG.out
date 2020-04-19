@@ -1,0 +1,54 @@
+== INPUT ==
+definition - type list EQUAL value SEMICOLON
+type - INT | REAL
+list - ID COMMA ID
+value - NUM | REALNUM | STRING
+== TOKENS ==
+definition nonterminal
+- assignment
+type nonterminal
+list nonterminal
+EQUAL terminal
+value nonterminal
+SEMICOLON terminal
+type nonterminal
+- assignment
+INT terminal
+| pipe
+REAL terminal
+list nonterminal
+- assignment
+ID terminal
+COMMA terminal
+ID terminal
+value nonterminal
+- assignment
+NUM terminal
+| pipe
+REALNUM terminal
+| pipe
+STRING terminal
+== GRAMMAR ==
+NonTerminals: 
+definition
+type
+list
+value
+Grammar: 
+definition - type list EQUAL value SEMICOLON 
+type - INT 
+type - REAL 
+list - ID COMMA ID 
+value - NUM 
+value - REALNUM 
+value - STRING 
+== FIRST ==
+FIRST(definition) = {INT, REAL}
+FIRST(type) = {INT, REAL}
+FIRST(list) = {ID}
+FIRST(value) = {NUM, REALNUM, STRING}
+== FOLLOW ==
+FOLLOW(definition) = {$}
+FOLLOW(type) = {ID}
+FOLLOW(list) = {EQUAL}
+FOLLOW(value) = {SEMICOLON}
