@@ -10,8 +10,8 @@ public class Token {
 	private static final Pattern VALID_TOKEN = Pattern.compile("^[a-zA-Z0-9\\{\\}\\[\\]\\-\\|]*$");
 	private static final Pattern ASSIGNMENT_TOKEN = Pattern.compile("^\\-$");
 	private static final Pattern PIPE_TOKEN = Pattern.compile("^\\|$");
-	private static final Pattern TERMINAL_TOKEN = Pattern.compile("^(VAR|BEGIN|END|ASSIGN|IF|WHILE|DO|THEN|PRINT|INT|REAL|STRING|PLUS|MINUS|UNDERSCORE|DIV|MULT|EQUAL|COLON|COMMA|SEMICOLON|LBRAC|RBRAC|LPAREN|RPAREN|NOTEQUAL|GREATER|LESS|LTEQ|GTEQ|DOT|ID|NUM|REALNUM)$");
-	private static final Pattern NONTERMINAL_TOKEN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
+	private static final Pattern TERMINAL_TOKEN = Pattern.compile("^[a-z]*$");
+	private static final Pattern NONTERMINAL_TOKEN = Pattern.compile("^[A-Z][A-Z0-9]*$");
 	public String token;
 	public String type;
 	public String message;
