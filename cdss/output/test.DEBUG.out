@@ -1,0 +1,48 @@
+== INPUT ==
+S - A a
+A - B D
+B - b | e
+D - d | e
+
+== TOKENS ==
+S nonterminal
+- assignment
+A nonterminal
+a terminal
+A nonterminal
+- assignment
+B nonterminal
+D nonterminal
+B nonterminal
+- assignment
+b terminal
+| pipe
+e terminal
+D nonterminal
+- assignment
+d terminal
+| pipe
+e terminal
+== GRAMMAR ==
+NonTerminals: 
+S
+A
+B
+D
+Grammar: 
+S - A a 
+A - B D 
+B - b 
+B - e 
+D - d 
+D - e 
+== FIRST ==
+FIRST(S) = {b, e}
+FIRST(A) = {b, e}
+FIRST(B) = {b, e}
+FIRST(D) = {d, e}
+== FOLLOW ==
+FOLLOW(S) = {$}
+FOLLOW(A) = {a}
+FOLLOW(B) = {d, e}
+FOLLOW(D) = {$}

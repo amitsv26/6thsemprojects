@@ -1,0 +1,8 @@
+FIRST(S) = {b, e}
+FIRST(A) = {b, e}
+FIRST(B) = {b, e}
+FIRST(D) = {d, e}
+FOLLOW(S) = {$}
+FOLLOW(A) = {a}
+FOLLOW(B) = {d, e}
+FOLLOW(D) = {$}
