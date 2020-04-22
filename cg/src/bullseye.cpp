@@ -17,16 +17,26 @@ bool dartActive = false;
 bool throwActive = false;
 
 // Points
-Point gameRoundPt(280, 770);
-Point gameScorePt(284, 750);
+Point gameRoundPt(280, 370);
+Point gameScorePt(284, 350);
 Point targetCenterPt(152, 570);
 Point dartCenterPt(152, 0);
 Point powerBarStartPt(0, 0);
 Point powerBarEndPt(25, 0);
+Point ByPt(480,350);
+Point AmitPt(480,330);
+Point AgathaPt(480,310);
+Point AkshitaPt(480,290);
+Point AmulyaPt(480,270);
 
 // Text
 Text gameRound(gameRoundPt, "Round: " + std::to_string(roundNum));
 Text gameScore(gameScorePt, "Score: " + std::to_string(score));
+Text By(ByPt," ");
+Text Amit(AmitPt," ");
+Text Agatha(AgathaPt," ");
+Text Akshita(AkshitaPt," ");
+Text Amulya(AmulyaPt," ");
 
 // Circles
 Circle firstTarget(targetCenterPt, 120); // Largest target
@@ -59,17 +69,38 @@ void display(void)
   gameScore.setText("Score: " + std::to_string(score));
   gameScore.setColor(1, 1, 1);
   gameScore.draw();
+  By.setText("By:");
+  By.setColor(1,1,1);
+  By.draw();
+  Amit.setText("Amit Kumar Gupta");
+  Amit.setColor(148,0,211);
+  Amit.draw();
+  Agatha.setText("Agatha Coutinho");
+  Agatha.setColor(148,0,211);
+  Agatha.draw();
+  Akshita.setText("Akshita Mishra");
+  Akshita.setColor(148,0,211);
+  Akshita.draw();
+  Amulya.setText("Amulya Yadav");
+  Amulya.setColor(148,0,211);
+  Amulya.draw();
+
+
+
+
+
+
 
   // Targets
-  firstTarget.setFillColor(0, 1, 0);
+  firstTarget.setFillColor(75, 0, 130);
   firstTarget.draw();
-  secondTarget.setFillColor(0, 0, 0);
+  secondTarget.setFillColor(0, 0, 255);
   secondTarget.draw();
-  thirdTarget.setFillColor(0, 1, 0);
+  thirdTarget.setFillColor(0, 255, 0);
   thirdTarget.draw();
-  fourthTarget.setFillColor(0, 0, 0);
+  fourthTarget.setFillColor(255, 255, 0);
   fourthTarget.draw();
-  fifthTarget.setFillColor(0, 1, 0);
+  fifthTarget.setFillColor(150, 157, 140);
   fifthTarget.draw();
   sixthTarget.setFillColor(0, 0, 0);
   sixthTarget.draw();
@@ -81,7 +112,7 @@ void display(void)
 
   // Power bar
   powerBar.setHeight(powerBarEndPt.getY());
-  powerBar.setFillColor(0, 0, 1);
+  powerBar.setFillColor(0, 13, 255);
   powerBar.draw();
 
   glFlush();
