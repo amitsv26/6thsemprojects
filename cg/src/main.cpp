@@ -1,6 +1,6 @@
 #include <GL/glut.h>
 
-#include "bullseye.cpp"
+#include "darts.cpp"
 
 int main(int argc, char **argv)
 {
@@ -8,7 +8,7 @@ int main(int argc, char **argv)
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
   glutInitWindowSize(1024, 768);
   glutInitWindowPosition(200, 200);
-  glutCreateWindow("Bullseye");
+  glutCreateWindow("Dart Game");
   glutReshapeFunc(reshape);
   glutDisplayFunc(display);
   glutKeyboardFunc(getKeyboardInput);
