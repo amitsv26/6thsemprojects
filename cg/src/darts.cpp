@@ -73,16 +73,16 @@ void display(void)
   By.setColor(1,1,1);
   By.draw();
   Amit.setText("Amit Kumar Gupta");
-  Amit.setColor(148,0,211);
+  Amit.setColor(0, 0, 255);
   Amit.draw();
   Agatha.setText("Agatha Coutinho");
-  Agatha.setColor(148,0,211);
+  Agatha.setColor(0, 0, 255);
   Agatha.draw();
   Akshita.setText("Akshita Mishra");
-  Akshita.setColor(148,0,211);
+  Akshita.setColor(0, 0, 255);
   Akshita.draw();
   Amulya.setText("Amulya Yadav");
-  Amulya.setColor(148,0,211);
+  Amulya.setColor(0,0,255);
   Amulya.draw();
 
 
