@@ -51,54 +51,7 @@ public class prc {
             System.out.println("Follow of "+gram.get(ij).lhs+" is "+gram.get(ij).follow);
             ij=(ij+1)%nt;
         }
-        
-        for(int i=0;i<nt;i++)
-        {
-            int k=0;
-            while(k<gram.get(i).rhs.size())
-            {
-                int ti=0;
-                while(ti<t.length())
-                {
-                    if(find_first(gram.get(i).rhs.get(k)).indexOf(t.charAt(ti))!=-1)
-                    {
-                        if(pe[gram.get(i).lhs.charAt(0)][t.charAt(ti)]!=null)
-                        {
-                            System.exit(0);
-                        }
-                        pe[gram.get(i).lhs.charAt(0)][t.charAt(ti)]=gram.get(i).rhs.get(k);
-                      
-                    }
-                    ti++;
-                }
-                k++;
-            }
-        }
-        for(int i=0;i<nt;i++)
-        {
-            int k=0;
-            while(k<gram.get(i).rhs.size())
-            {
-                int ti=0;
-                while(ti<t.length())
-                {
-                    if(gram.get(i).rhs.get(k).equals("#"))
-                    {
-                        String follow=gram.get(i).follow;
-                        if(follow.contains(t.charAt(ti)+""))
-                        {
-                            if(pe[gram.get(i).lhs.charAt(0)][t.charAt(ti)]!=null)
-                            {
-                                System.exit(0);
-                            }
-                            pe[gram.get(i).lhs.charAt(0)][t.charAt(ti)]=gram.get(i).rhs.get(k);
-                        }
-                    }
-                    ti++;
-                }
-                k++;
-            }
-        }
+       
         System.out.println("");
         
         
@@ -216,4 +169,3 @@ class Production
         first="";follow="";
     }
 }
-
