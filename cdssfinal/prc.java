@@ -2,8 +2,8 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class prc {
-    static int nt;
-    static ArrayList<Production> gram=new ArrayList<>();
+    static int nt;     
+    static ArrayList<Production> gram=new ArrayList<>();      //creating array of object of type production class.
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
 	    String firstcopy,followcopy;
@@ -14,20 +14,20 @@ public class prc {
 //        C->h/#
         String pe[][]=new String[200][200];
         
-        System.out.print("Enter Number of Non terminals: ");
+        System.out.print("Enter Number of Non terminals: ");			//Reading no. of non-terminals
         nt=sc.nextInt();
         for(int i=1;i<=nt;i++)
         {
-            System.out.print("Enter LHS of production "+i+": ");
+            System.out.print("Enter LHS of production "+i+": ");		//Reading productions
             String lhs=sc.next();
             Production p=new Production(lhs);
-            System.out.print("Enter number of RHS: ");
+            System.out.print("Enter number of RHS: ");				
             int r=sc.nextInt();
             for(int h=0;h<r;h++)
                 p.rhs.add(sc.next());
             gram.add(p);
         }
-        System.out.print("Number of terminals: ");
+        System.out.print("Number of terminals: ");			//Reading no. of terminals
         int T=sc.nextInt();
         String t="";
         for(int f=0;f<T;f++)
@@ -38,8 +38,8 @@ public class prc {
         t+="$";
         for(int i=0;i<nt;i++)
         {
-            gram.get(i).first=find_first(gram.get(i).lhs);
-   int n = gram.get(i).first.toCharArray().length;	
+            gram.get(i).first=find_first(gram.get(i).lhs);			//Calling find first function
+   int n = gram.get(i).first.toCharArray().length;				//Removing redundant letters from the string
    firstcopy= removeDuplicate(gram.get(i).first.toCharArray(),n);
             System.out.println("First of "+gram.get(i).lhs+" is "+"{ "+firstcopy +" }"   );
 	   firstcopy="";
@@ -52,8 +52,8 @@ public class prc {
                 break;
             else
                 gram.get(ij).follow=(follow);
-   int m = gram.get(ij).follow.toCharArray().length;	
-   followcopy= removeDuplicate(gram.get(ij).follow.toCharArray(),m);
+   int m = gram.get(ij).follow.toCharArray().length;				//Calling find follow function
+   followcopy= removeDuplicate(gram.get(ij).follow.toCharArray(),m);		//Removing redundant letters from the string
             System.out.println("Follow of "+gram.get(ij).lhs+" is "+"{ "+followcopy+" }");
             ij=(ij+1)%nt;
 	followcopy="";
@@ -65,36 +65,36 @@ public class prc {
         
         
     }
-    static String find_follow(char c)
+    static String find_follow(char c)			//Function to compute follow
     {
         String follow="";
-        if(c==gram.get(0).lhs.charAt(0))
+        if(c==gram.get(0).lhs.charAt(0))			//Checking if it's first symbol
         {
-            follow="$";
+            follow="$";						//If yes, put $ for follow of that symbol
         }
        
         int j;
-                    for(j=0;j<nt;j++)
+                    for(j=0;j<nt;j++)				
             {
                 int k=0;
                 while(k<gram.get(j).rhs.size())
                 {
-                    if(gram.get(j).rhs.get(k).indexOf(c)!=-1)
+                    if(gram.get(j).rhs.get(k).indexOf(c)!=-1)		//Check if rhs is empty string
                     {
-                        int split=gram.get(j).rhs.get(k).indexOf(c);
-                        if(split==gram.get(j).rhs.get(k).length()-1)
+                        int split=gram.get(j).rhs.get(k).indexOf(c);	//Check if there's any synmbol following the passed character
+                        if(split==gram.get(j).rhs.get(k).length()-1)	//If no,
                         {
-                            follow+=find_follow(gram.get(j).lhs.charAt(0));
+                            follow+=find_follow(gram.get(j).lhs.charAt(0));//Add follow of lhs to follow of current terminal
                             
                         }
                         else{
-                            if(!find_first(gram.get(j).rhs.get(k).substring(split+1)).contains("#"))
+                            if(!find_first(gram.get(j).rhs.get(k).substring(split+1)).contains("#"))//Check if there's no epsilon followed by passed character
                             {
-                            follow+=find_first(gram.get(j).rhs.get(k).substring(split+1));
+                            follow+=find_first(gram.get(j).rhs.get(k).substring(split+1)); //If yes, then, add first of next character
                             }
                             else
                             {
-                                follow+=find_first(gram.get(j).rhs.get(k).substring(split+1)).replace("#","")+find_follow(gram.get(j).lhs.charAt(0));
+                                follow+=find_first(gram.get(j).rhs.get(k).substring(split+1)).replace("#","")+find_follow(gram.get(j).lhs.charAt(0));    //If there's epsilon, replace epsilon with empty string and union with follow of lhs
                             }
                         }
                     }
@@ -104,25 +104,25 @@ public class prc {
          return follow;
         
     }
-    static String find_first(String s)
+    static String find_first(String s)				//Function to compute first
     {
         int k=1;
         String first="";
-        if(s.length()==1 &&Pattern.matches("[A-Z]",s.charAt(0)+""))
+        if(s.length()==1 &&Pattern.matches("[A-Z]",s.charAt(0)+""))	//Check if the passed character is terminal or not
         {
            first=first_cap(s.charAt(0));
             
         }
         else
         {
-            if(!Pattern.matches("[A-Z]",s.charAt(0)+""))
-                first=""+s.charAt(0);
+            if(!Pattern.matches("[A-Z]",s.charAt(0)+""))		//Check if passed character is non-terminal
+                first=""+s.charAt(0);					//if yes, add it to the first of that character
             else{
-                if((!first_cap(s.charAt(0)).contains("#"))||s.length()==1)
+                if((!first_cap(s.charAt(0)).contains("#"))||s.length()==1)//If there's no epsilon, find first of the followed terminal symbol
                 {
                     first=first_cap(s.charAt(0));
                 }
-                else{
+                else{					//else if there's epsilon, replace epsilon with empty string and find first of previous character
                     first=first_cap(s.charAt(0)).replace("#", "")+find_first(s.substring(1));
                 }
             }
@@ -134,7 +134,7 @@ public class prc {
         
         
     }
-    static String first_cap(char c)
+    static String first_cap(char c) //Function used to find first for terminals followed by any character
     {
         String capfs="";
         int k=0;
@@ -149,7 +149,7 @@ public class prc {
         
         
     }
-    static int find_num(char c)
+    static int find_num(char c)		//Function used to find position of the characters in production rules
     {
         for(int i=0;i<nt;i++)
         {
@@ -190,7 +190,7 @@ public class prc {
 	} 
 
 }
-class Production
+class Production			//Production class used to store the values of non-terminal and terminal along with first and follow
 {
     String lhs;
     ArrayList<String> rhs;
