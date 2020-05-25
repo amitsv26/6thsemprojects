@@ -6,6 +6,7 @@ public class prc {
     static ArrayList<Production> gram=new ArrayList<>();
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
+	    String firstcopy,followcopy;
 //         
 //        S->ACB
 //        A->BCa/da
@@ -17,7 +18,7 @@ public class prc {
         nt=sc.nextInt();
         for(int i=1;i<=nt;i++)
         {
-            System.out.print("Enter LHS of prodcution "+i+": ");
+            System.out.print("Enter LHS of production "+i+": ");
             String lhs=sc.next();
             Production p=new Production(lhs);
             System.out.print("Enter number of RHS: ");
@@ -38,7 +39,10 @@ public class prc {
         for(int i=0;i<nt;i++)
         {
             gram.get(i).first=find_first(gram.get(i).lhs);
-            System.out.println("First of "+gram.get(i).lhs+" is "+gram.get(i).first);
+   int n = gram.get(i).first.toCharArray().length;	
+   firstcopy= removeDuplicate(gram.get(i).first.toCharArray(),n);
+            System.out.println("First of "+gram.get(i).lhs+" is "+"{ "+firstcopy +" }"   );
+	   firstcopy="";
         }
         int ij=0;
         while(true)
@@ -48,8 +52,11 @@ public class prc {
                 break;
             else
                 gram.get(ij).follow=(follow);
-            System.out.println("Follow of "+gram.get(ij).lhs+" is "+gram.get(ij).follow);
+   int m = gram.get(ij).follow.toCharArray().length;	
+   followcopy= removeDuplicate(gram.get(ij).follow.toCharArray(),m);
+            System.out.println("Follow of "+gram.get(ij).lhs+" is "+"{ "+followcopy+" }");
             ij=(ij+1)%nt;
+	followcopy="";
         }
        
         System.out.println("");
@@ -152,6 +159,36 @@ public class prc {
         return 999;
     }
     
+
+	static String removeDuplicate(char str[], int n) 
+	{ 
+		// Used as index in the modified string 
+		int index = 0; 
+
+		// Traverse through all characters 
+		for (int i = 0; i < n; i++) 
+		{ 
+
+			// Check if str[i] is present before it 
+			int j; 
+			for (j = 0; j < i; j++) 
+			{ 
+				if (str[i] == str[j]) 
+				{ 
+					break; 
+				} 
+			} 
+
+			// If not present, then add it to 
+			// result. 
+			if (j == i) 
+			{ 
+				str[index++] = str[i]; 
+			} 
+		} 
+		return String.valueOf(Arrays.copyOf(str, index)); 
+	} 
+
 }
 class Production
 {
